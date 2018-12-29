@@ -1,0 +1,83 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.Scanner;
+//class name
+public class GPAcalculation{
+
+
+
+    static Scanner input = new Scanner(System.in);
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	   System.out.println("Enter the number of courses: ");
+		int numOfCourses = input.nextInt();
+		int courseCounter = 0;
+		int[] courseScores = new int[numOfCourses];
+		String skip = input.nextLine();
+        for(int i =0; i < numOfCourses; i++)
+        {
+            System.out.println("Enter course #" + (i+1) + " grade: ");
+            String x = input.nextLine();
+            if(!x.equals("")){
+            courseScores[i] = gradeCalculate(x);
+            }else{
+                System.out.println("Empty");
+                return;
+            }
+        }
+        System.out.println("Your GPA is :" + gpaCalc(courseScores) );
+		    
+	}
+	public static int gradeCalculate(String str)
+	{
+	    
+	    str = str.toUpperCase();
+	    System.out.println(str);
+	    int score = 0;
+	    
+	     switch(str.charAt(0))
+	     {
+	         
+	        case 'A':
+	            score = 12;
+	            break;
+	       case 'B' :
+	           score = 9;
+	           break;
+	       case 'C' :
+	           score = 6;
+	           break;
+	       case 'D' :
+	           score = 3;
+	           break;
+	           
+	       default:
+	           score = 0;
+	           break;
+  
+	     }
+	     if(str.length() != 1){
+	        if(str.charAt(1) == '+'){
+	            if(score != 12)
+	            score++;   
+	        }else if(str.charAt(1) == '-'){
+	            score--;
+	        }else{
+	            score = score;
+	        }
+	        }
+	    return score; 
+	}
+	public static float gpaCalc (int[] grades)
+	{
+	    float gpa = 0;
+	    for (int i = 0;i < grades.length;i++){
+	        System.out.println("grade "+(i+1) + ": " + grades[i]);
+	        gpa += grades[i];
+	    }
+	    System.out.println(gpa);
+	     return ((gpa/3)/(grades.length));
+	
+	}
+}
